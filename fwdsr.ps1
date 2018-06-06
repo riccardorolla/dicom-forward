@@ -9,7 +9,7 @@ start-dicomserver -Port $conf.port -AET $conf.AET  -Environment $conf  -onCStore
 	 $prefix=($cc[0] + "-" + $cc[1])
 
 		$sendStatus = (send-dicom -AET $association.CallingAE -SOPClassProvider $env[$prefix] -DicomFile $file).Status
-		Write-EventLog -LogName "Application" -Source "Forward Dicom" -EventID 1200 -EntryType Information -Message (
+		Write-EventLog -LogName "Application" -Source "fwdsrService" -EventID 1200 -EntryType Information -Message (
 			"send AccessionNumber:" + $header.AccessionNumber +  "`n" +
 			"StudyInstanceUID:"+ $header.StudyInstanceUID + "`n" +
 			"SOPInstanceUID:" + $header.SOPInstanceUID +  "`n" +
@@ -24,7 +24,7 @@ start-dicomserver -Port $conf.port -AET $conf.AET  -Environment $conf  -onCStore
 			 
 			save-dicom -Filename ($env.error_dir + '\' + $header.StudyInstanceUID + '\' + $header.SOPInstanceUID)  -DicomFile $file
 				[Dicom.Network.DicomStatus]::Success
-			Write-EventLog -LogName "Application" -Source "Forward Dicom" -EventID 1201 -EntryType Error -Message ("Save filename:" +  ($env.error_dir + '\' + $header.StudyInstanceUID + '\' + $header.SOPInstanceUID))
+			Write-EventLog -LogName "Application" -Source "fwdsrService" -EventID 1201 -EntryType Error -Message ("Save filename:" +  ($env.error_dir + '\' + $header.StudyInstanceUID + '\' + $header.SOPInstanceUID))
 			}
 		
 }
