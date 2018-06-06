@@ -12,3 +12,5 @@ error_dir=d:\admin\error
 8-2=PACS4@192.168.1.3:104
 8-1=PACS4@192.168.1.3:104
 8-3=PACS4@192.168.1.3:104
+displayName=ForwardDicom
+description=Forward Dicom DOSESR
